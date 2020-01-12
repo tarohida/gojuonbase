@@ -35,6 +35,7 @@ Class Gojuonbase
         foreach($reversed_input as $seq => $word)
         {
             $match_word_seq = array_search($word, $this->gojuon);
+            print_r($match_word_seq."\n");
             // match_word_seqかmatch_word_numか迷う
             if($match_word_seq === False){
                 // !$match_word_seqだと、[0 => 'あ']の時にFalseになってしまう
@@ -51,6 +52,3 @@ Class Gojuonbase
         return $this->decimal;
     }
 }
-
-$aaa = new Gojuonbase('ああああ');
-print_r($aaa->decimal());
