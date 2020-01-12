@@ -3,7 +3,6 @@
 Class Gojuonbase
 {
     protected $gojuon = array("あ","い","う","え","お","か","き","く","け","こ","さ","し","す","せ","そ","た","ち","つ","て","と","な","に","ぬ","ね","の","は","ひ","ふ","へ","ほ","ま","み","む","め","も","や","ゆ","よ","ら","り","る","れ","ろ","わ","ゐ","ゑ","を","ん");
-    protected $characters_counts = 48;
 
     protected $decimal;
 
@@ -41,7 +40,7 @@ Class Gojuonbase
                 // !$match_word_seqだと、[0 => 'あ']の時にFalseになってしまう
                 trigger_error('Char is Invalid', E_USER_ERROR);
             }
-            $sum_decimal = $sum_decimal + (int)$match_word_seq * ((int)$this->characters_counts ** (int)$seq);
+            $sum_decimal = $sum_decimal + (int)$match_word_seq * (count($this->gojuon) ** (int)$seq);
         }
 
         return $sum_decimal;
@@ -52,3 +51,6 @@ Class Gojuonbase
         return $this->decimal;
     }
 }
+
+$aaa = new Gojuonbase('ああああ');
+print_r($aaa->decimal());
