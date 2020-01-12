@@ -19,8 +19,7 @@ Class Gojuonbase
         }
         else
         {
-            return False;
-            // Todo: cause error.
+            trigger_error('input type is Invalid', E_USER_ERROR);
         }
     } 
 
@@ -37,10 +36,11 @@ Class Gojuonbase
         foreach($reversed_input as $seq => $word)
         {
             $match_word_seq = array_search($word, $this->gojuon);
+            print_r($match_word_seq."\n");
             // match_word_seqかmatch_word_numか迷う
-            if(!$match_word_seq){
-                return False;
-                // Todo: cause error.
+            if($match_word_seq === False){
+                // !$match_word_seqだと、[0 => 'あ']の時にFalseになってしまう
+                trigger_error('Char is Invalid', E_USER_ERROR);
             }
             $sum_decimal = $sum_decimal + (int)$match_word_seq * ((int)$this->characters_counts ** (int)$seq);
         }
@@ -54,12 +54,6 @@ Class Gojuonbase
     }
 }
 
-function gojuonToDecimal($input)
-{
-    $obj = new Gojuonbase($input);
-    return $obj->decimal();
-}
-
-        
-$text = "なのやつ";
-print_r(gojuonToDecimal($text));
+$input = "あかさた";
+$obj = new Gojuonbase($input);
+print_r($obj->decimal());
