@@ -50,4 +50,27 @@ Class Gojuonbase
     {
         return $this->decimal;
     }
+
+    public function gojuon()
+    {
+        $gojuon_array = [];
+        $decimal = $this->decimal;
+
+        while(True)
+        {
+            $quotient = floor($decimal / count($this->gojuon)); 
+            $remainder = $decimal % count($this->gojuon); 
+
+            array_push($gojuon_array, $this->gojuon[$remainder]);
+
+            if($quotient == 0)
+            {
+               break; 
+            }
+
+            $decimal = $quotient;
+        }
+
+        return implode(array_reverse($gojuon_array)); 
+    }
 }
